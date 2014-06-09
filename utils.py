@@ -8,7 +8,7 @@ def get_tz_for_city(city,state):
 	resp = requests.get(gmap_api_url)
 	try:
 		json_resp = json.loads(resp.text)
-		if 'results' in json_resp:
+		if 'results' in json_resp and len(json_resp['results']) > 0:
 			lat = json_resp['results'][0]['geometry']['location']['lat']
 			lng = json_resp['results'][0]['geometry']['location']['lng']
 			tz_api_url = "http://api.timezonedb.com/?lat=%s&lng=%s&key=%s&format=json" % (lat,lng,TZ_API_KEY)
